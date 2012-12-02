@@ -1618,9 +1618,11 @@ class Form(object):
         assert fields is not None, (
             "No field by the name %r found (fields: %s)"
             % (name, ', '.join(map(repr, self.fields.keys()))))
-        assert len(fields) == 1, (
-            "Multiple fields match %r: %s"
-            % (name, ', '.join(map(repr, fields))))
+        if len(fields) > 1:
+            return fields
+#        assert len(fields) == 1, (
+#            "Multiple fields match %r: %s"
+#            % (name, ', '.join(map(repr, fields))))
         fields[0].value = value
 
     def __getitem__(self, name):
@@ -1630,9 +1632,11 @@ class Form(object):
         fields = self.fields.get(name)
         assert fields is not None, (
             "No field by the name %r found" % name)
-        assert len(fields) == 1, (
-            "Multiple fields match %r: %s"
-            % (name, ', '.join(map(repr, fields))))
+        if len(fields) > 1:
+            return fields
+#        assert len(fields) == 1, (
+#            "Multiple fields match %r: %s"
+#            % (name, ', '.join(map(repr, fields))))
         return fields[0]
 
     def lint(self):
