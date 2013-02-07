@@ -1149,7 +1149,7 @@ class TestApp(object):
                     res.request.url, res)
             return
         if status is None:
-            if res.status_int >= 200 and res.status_int < 400:
+            if res.status_int >= 200 and res.status_int < 501:
                 return
             raise AppError(
                 "Bad response: %s (not 200 OK or 3xx redirect for %s)\n%s",
